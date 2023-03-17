@@ -1,16 +1,7 @@
 #ifndef GAMECORE_H
 #define GAMECORE_H
 
-#include <iostream>
-#include <ctime>
-#include <cstdlib>
-
-#include <SFML/Graphics.hpp>
-#include <SFML/Window.hpp>
-#include <SFML/System.hpp>
-#include <SFML/Audio.hpp>
-#include <SFML/Network.hpp>
-
+#include "MainMenuState.h"
 
 class GameCore
 {
@@ -21,15 +12,28 @@ class GameCore
 		sf::Event sfEvent;
 		sf::Clock dtClock;
 		     //Delta time
-		float dt;
+		float dt; 
+
+		std::vector<sf::VideoMode> videoModes;
+		sf::ContextSettings windowSettings;
+		bool fullscreen;
+
+		std::stack<State*> states;
+
+		std::map<std::string, int> supportedKeys;
 
 		//Initializations
+		void initVariables();
 		void initWindow();
+		void initKeys();
+		void initState();
+		
 
 public:
 	GameCore();
 	virtual ~GameCore();
 
+	void endApp();
 	void updateDt();
 	void updateSFMLEvents(); 
 	void update();
