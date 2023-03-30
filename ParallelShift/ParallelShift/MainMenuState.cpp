@@ -25,14 +25,8 @@ MainMenuState::~MainMenuState()
 	}
 }
 
-void MainMenuState::endState()
-{
-	std::cout << "Ending Game menu state" << "\n";
-}
-
 void MainMenuState::updateInput(const float& dt)
 {
-	this->checkForEnd();
 
 }
 
@@ -50,7 +44,7 @@ void MainMenuState::initBackground()
 		)
 	);
 
-	if (!this->backgroundTexture.loadFromFile("Resources/Images/Background/bg1.png"))
+	if (!this->backgroundTexture.loadFromFile("Resources/Images/Background/landascape1920x1080.png"))
 	{
 		throw"Failed loading background on main menu";
 	}
@@ -86,13 +80,25 @@ void MainMenuState::initKeybinds()
 
 void MainMenuState::initButtons()
 {
-	this->buttons["NEW_GAME"] = new Button(100, 100, 150, 50,
-		&this->font, "New Game",
-		sf::Color(70, 70, 70, 200), sf::Color(150, 150, 150, 255), sf::Color(20, 20, 20, 200));
+	this->buttons["NEW_GAME"] = new Button(300, 480, 150, 50,
+		&this->font, "New Game", 25,
+		sf::Color(255, 255, 255, 255), sf::Color(150, 150, 150, 255), sf::Color(20, 20, 20, 200),
+		sf::Color(25, 25, 25, 255), sf::Color(150, 150, 150, 255), sf::Color(20, 20, 20, 0));
 
-	this->buttons["EXIT_GAME"] = new Button(100, 300, 150, 50,
-		&this->font, "Quit Game",
-		sf::Color(100, 100, 100, 200), sf::Color(150, 150, 150, 255), sf::Color(20, 20, 20, 200));
+	this->buttons["SETTINGS"] = new Button(300, 580, 150, 50,
+		&this->font, "Settings", 25,
+		sf::Color(255, 255, 255, 255), sf::Color(150, 150, 150, 255), sf::Color(20, 20, 20, 200),
+		sf::Color(25, 25, 25, 255), sf::Color(150, 150, 150, 255), sf::Color(20, 20, 20, 0));
+
+	this->buttons["EDITOR_STATE"] = new Button(300, 680, 150, 50,
+		&this->font, "Editor", 25,
+		sf::Color(255, 255, 255, 255), sf::Color(150, 150, 150, 255), sf::Color(20, 20, 20, 200),
+		sf::Color(25, 25, 25, 255), sf::Color(150, 150, 150, 255), sf::Color(20, 20, 20, 0));
+
+	this->buttons["EXIT_GAME"] = new Button(300, 880, 150, 50,
+		&this->font, "Quit Game", 25,
+		sf::Color(255, 255, 255, 255), sf::Color(150, 150, 150, 255), sf::Color(20, 20, 20, 200),
+		sf::Color(25, 25, 25, 255), sf::Color(150, 150, 150, 255), sf::Color(20, 20, 20, 0));
 }
 
 void MainMenuState::updateButtons()
@@ -107,9 +113,14 @@ void MainMenuState::updateButtons()
 		this->states->push(new GameState(this->window, this->supportedKeys, this->states));
 	}
 
+	if (this->buttons["EDITOR_STATE"]->isPressed())
+	{
+		this->states->push(new EditorState(this->window, this->supportedKeys, this->states));
+	}
+
 	if (this->buttons["EXIT_GAME"]->isPressed())
 	{
-		this->quit = true;
+		this->endState();
 	}
 }
 
@@ -124,7 +135,7 @@ void MainMenuState::update(const float& dt)
 	std::cout << this->mousePosView.x << " " << this->mousePosView.y << "\n";
 }
 
-void MainMenuState::renderButtons(sf::RenderTarget* target)
+void MainMenuState::renderButtons(sf::RenderTarget& target)
 {
 	for (auto& it : this->buttons)
 	{
@@ -138,10 +149,10 @@ void MainMenuState::render(sf::RenderTarget* target)
 		target = this->window;
 
 	target->draw(this->background);
-	this->renderButtons(target);
+	this->renderButtons(*target);
 
 	//Method to get position on mouse so you can see where you want to put the menu elements.
-	sf::Text mouseText;
+	/*sf::Text mouseText;
 	mouseText.setPosition(this->mousePosView);
 	mouseText.setFont(this->font);
 	mouseText.setCharacterSize(12);
@@ -149,5 +160,5 @@ void MainMenuState::render(sf::RenderTarget* target)
 	ss << this->mousePosView.x << " " << this->mousePosView.y;
 	mouseText.setString(ss.str());
 
-	target->draw(mouseText);
+	target->draw(mouseText);*/
 }
