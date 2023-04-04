@@ -36,6 +36,7 @@ public :
 	MovementComponent(sf::Sprite&, float maxVelocity, float acceleration, float diceleration);
 	virtual ~MovementComponent();
 
+	const float& getMaxVelocity() const;
 	const sf::Vector2f& getVelocity() const;
 
 	const bool getState(const short unsigned state) const;

@@ -40,7 +40,7 @@ public:
 	virtual ~Button();
 
 	const bool isPressed() const;
-	void updatePressButton(const sf::Vector2f mousePos);
+	void updatePressButton(const sf::Vector2f& mousePos);
 	void render(sf::RenderTarget& target);
 };
 
