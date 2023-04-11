@@ -8,22 +8,24 @@ class GameCore
 	private: 
 
 		//Variables
+		GraphicsSettings gfxSettings;
+		StateData stateData;
 		sf::RenderWindow *window;
 		sf::Event sfEvent;
 		sf::Clock dtClock;
-		     //Delta time
+		//Delta time
 		float dt; 
-
-		std::vector<sf::VideoMode> videoModes;
-		sf::ContextSettings windowSettings;
-		bool fullscreen;
 
 		std::stack<State*> states;
 
 		std::map<std::string, int> supportedKeys;
 
+		float gridSize;
+
 		//Initializations
 		void initVariables();
+		void initGraphicsSettings();
+		void initStateData();
 		void initWindow();
 		void initKeys();
 		void initState();

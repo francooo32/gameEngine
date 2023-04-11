@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "GameCore.h"
 
 int main()

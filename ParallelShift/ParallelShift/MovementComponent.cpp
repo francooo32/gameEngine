@@ -1,6 +1,5 @@
+#include "stdafx.h"
 #include "MovementComponent.h"
-
-
 
 MovementComponent::MovementComponent(sf::Sprite& sprite, 
 	float maxVelocity, float acceleration, float deceleration)
@@ -13,6 +12,13 @@ MovementComponent::MovementComponent(sf::Sprite& sprite,
 
 MovementComponent::~MovementComponent()
 {
+}
+
+const float& MovementComponent::getMaxVelocity() const
+{
+	// TODO: Insertar una instrucción "return" aquí
+
+	return this->maxVelocity;
 }
 
 const sf::Vector2f& MovementComponent::getVelocity() const

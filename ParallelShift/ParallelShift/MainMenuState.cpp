@@ -1,7 +1,8 @@
+#include "stdafx.h"
 #include "MainMenuState.h"
 
-MainMenuState::MainMenuState(sf::RenderWindow* window, std::map<std::string, int>* supportedKeys, std::stack<State*>* states)
-	: State( window, supportedKeys, states)
+MainMenuState::MainMenuState(StateData* state_data)
+								: State(state_data)
 {	
 	//Make this local string cause the constructor was having problem trying to recibe the direct string reference
 	//std::string gametext = "New Game";
@@ -23,11 +24,6 @@ MainMenuState::~MainMenuState()
 	{
 		delete it->second;
 	}
-}
-
-void MainMenuState::updateInput(const float& dt)
-{
-
 }
 
 void MainMenuState::initVariables()
@@ -80,25 +76,30 @@ void MainMenuState::initKeybinds()
 
 void MainMenuState::initButtons()
 {
-	this->buttons["NEW_GAME"] = new Button(300, 480, 150, 50,
+	this->buttons["NEW_GAME"] = new gui::Button(300.f, 480.f, 150.f, 50.f,
 		&this->font, "New Game", 25,
 		sf::Color(255, 255, 255, 255), sf::Color(150, 150, 150, 255), sf::Color(20, 20, 20, 200),
 		sf::Color(25, 25, 25, 255), sf::Color(150, 150, 150, 255), sf::Color(20, 20, 20, 0));
 
-	this->buttons["SETTINGS"] = new Button(300, 580, 150, 50,
+	this->buttons["SETTINGS"] = new gui::Button(300.f, 580.f, 150.f, 50.f,
 		&this->font, "Settings", 25,
 		sf::Color(255, 255, 255, 255), sf::Color(150, 150, 150, 255), sf::Color(20, 20, 20, 200),
 		sf::Color(25, 25, 25, 255), sf::Color(150, 150, 150, 255), sf::Color(20, 20, 20, 0));
 
-	this->buttons["EDITOR_STATE"] = new Button(300, 680, 150, 50,
+	this->buttons["EDITOR"] = new gui::Button(300.f, 680.f, 150.f, 50.f,
 		&this->font, "Editor", 25,
 		sf::Color(255, 255, 255, 255), sf::Color(150, 150, 150, 255), sf::Color(20, 20, 20, 200),
 		sf::Color(25, 25, 25, 255), sf::Color(150, 150, 150, 255), sf::Color(20, 20, 20, 0));
 
-	this->buttons["EXIT_GAME"] = new Button(300, 880, 150, 50,
+	this->buttons["EXIT_GAME"] = new gui::Button(300.f, 880.f, 150.f, 50.f,
 		&this->font, "Quit Game", 25,
 		sf::Color(255, 255, 255, 255), sf::Color(150, 150, 150, 255), sf::Color(20, 20, 20, 200),
 		sf::Color(25, 25, 25, 255), sf::Color(150, 150, 150, 255), sf::Color(20, 20, 20, 0));
+}
+
+void MainMenuState::updateInput(const float& dt)
+{
+
 }
 
 void MainMenuState::updateButtons()
@@ -110,12 +111,17 @@ void MainMenuState::updateButtons()
 
 	if (this->buttons["NEW_GAME"]->isPressed())
 	{
-		this->states->push(new GameState(this->window, this->supportedKeys, this->states));
+		this->states->push(new GameState(this->stateData));
 	}
 
-	if (this->buttons["EDITOR_STATE"]->isPressed())
+	if (this->buttons["SETTINGS"]->isPressed())
 	{
-		this->states->push(new EditorState(this->window, this->supportedKeys, this->states));
+		this->states->push(new SettingsState(this->stateData));
+	}
+
+	if (this->buttons["EDITOR"]->isPressed())
+	{
+		this->states->push(new EditorState(this->stateData));
 	}
 
 	if (this->buttons["EXIT_GAME"]->isPressed())
