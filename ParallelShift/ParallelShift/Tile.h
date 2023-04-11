@@ -11,7 +11,7 @@ protected :
 
 public :
 	Tile();
-	Tile(float x, float y, float griSizeF);
+	Tile(float x, float y, float griSizeF, sf::Texture& texture);
 	virtual ~Tile();
 
 	void update();
