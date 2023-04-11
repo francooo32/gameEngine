@@ -13,6 +13,8 @@ private:
 	
 	std::vector<std::vector<std::vector<Tile*> > > map;
 
+	sf::Texture tileTextureSheet;
+
 public:
 	TileMap(float gridSize, unsigned width, unsigned height);
 	virtual ~TileMap();
@@ -20,7 +22,7 @@ public:
 	void update();
 	void render(sf::RenderTarget& target);
 	void addTile(const unsigned x, const unsigned y, const unsigned z);
-	void removeTile();
+	void removeTile(const unsigned x, const unsigned y, const unsigned z);
 };
 
 #endif

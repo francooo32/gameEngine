@@ -44,6 +44,10 @@ void EditorState::updateEditorInput(const float& dt)
 	{
 		this->tileMap->addTile(this->mousePosGrid.x, this->mousePosGrid.y, 0);
 	}
+	else if (sf::Mouse::isButtonPressed(sf::Mouse::Right) && this->getKeyTime())
+	{
+		this->tileMap->removeTile(this->mousePosGrid.x, this->mousePosGrid.y, 0);
+	}
 }
 
 void EditorState::initVariables()
