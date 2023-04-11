@@ -28,6 +28,9 @@
     <Filter Include="GUI">
       <UniqueIdentifier>{9a7300d4-4706-405a-8481-2b253c589b34}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Map">
+      <UniqueIdentifier>{e8fadb42-4d1c-4ae6-8ada-d441dfd56ed1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -48,7 +51,7 @@
     <ClCompile Include="MainMenuState.cpp">
       <Filter>State</Filter>
     </ClCompile>
-    <ClCompile Include="Button.cpp">
+    <ClCompile Include="Gui.cpp">
       <Filter>Archivos de recursos</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
@@ -75,6 +78,15 @@
     <ClCompile Include="SettingsState.cpp">
       <Filter>State</Filter>
     </ClCompile>
+    <ClCompile Include="TileMap.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Archivos de encabezado</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsSettings.cpp">
+      <Filter>Archivos de recursos</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameCore.h">
@@ -92,7 +104,7 @@
     <ClInclude Include="MainMenuState.h">
       <Filter>State</Filter>
     </ClInclude>
-    <ClInclude Include="Button.h">
+    <ClInclude Include="Gui.h">
       <Filter>Archivos de recursos</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
@@ -118,6 +130,15 @@
     </ClInclude>
     <ClInclude Include="SettingsState.h">
       <Filter>State</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMap.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsSettings.h">
+      <Filter>Archivos de recursos</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
