@@ -16,7 +16,9 @@ class EditorState :
 {
 public : 
 private:
+	sf::View view;
 	sf::Font font;
+	sf::Text cursorText;
 	PauseMenu* pmenu;
 
 	std::map<std::string, gui::Button*> buttons;
@@ -24,10 +26,20 @@ private:
 	TileMap* tileMap;
 
 	sf::RectangleShape selectorRect;
+	sf::RectangleShape sidebar;
+	sf::IntRect textureRect;
+
+	gui::TextureSelector* textureSelector;
+
+	bool collision;
+	short type;
+	float cameraSpeed;
 
 	void initVariables();
+	void initView();
 	void initBackground();
 	void initfonts();
+	void initText();
 	void initKeybinds();
 	void initPauseMenu();
 	void initButtons();
@@ -42,7 +54,7 @@ public:
 	void updateInput(const float& dt);
 	void updateEditorInput(const float& dt);
 	void updateButtons();
-	void updateGui();
+	void updateGui(const float& dt);
 	void updatePauseMenuButtons();
 	void update(const float& dt);
 	void renderButtons(sf::RenderTarget& target);

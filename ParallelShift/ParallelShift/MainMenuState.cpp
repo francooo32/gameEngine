@@ -76,25 +76,25 @@ void MainMenuState::initKeybinds()
 
 void MainMenuState::initButtons()
 {
-	this->buttons["NEW_GAME"] = new gui::Button(300.f, 480.f, 150.f, 50.f,
+	this->buttons["NEW_GAME"] = new gui::Button(300.f, 480.f, 150.f, 40.f,
 		&this->font, "New Game", 25,
 		sf::Color(255, 255, 255, 255), sf::Color(150, 150, 150, 255), sf::Color(20, 20, 20, 200),
-		sf::Color(25, 25, 25, 255), sf::Color(150, 150, 150, 255), sf::Color(20, 20, 20, 0));
+		sf::Color(25, 25, 25, 220), sf::Color(150, 150, 150, 220), sf::Color(20, 20, 20, 220));
 
-	this->buttons["SETTINGS"] = new gui::Button(300.f, 580.f, 150.f, 50.f,
+	this->buttons["SETTINGS"] = new gui::Button(300.f, 580.f, 150.f, 40.f,
 		&this->font, "Settings", 25,
 		sf::Color(255, 255, 255, 255), sf::Color(150, 150, 150, 255), sf::Color(20, 20, 20, 200),
-		sf::Color(25, 25, 25, 255), sf::Color(150, 150, 150, 255), sf::Color(20, 20, 20, 0));
+		sf::Color(25, 25, 25, 220), sf::Color(150, 150, 150, 220), sf::Color(20, 20, 20, 220));
 
-	this->buttons["EDITOR"] = new gui::Button(300.f, 680.f, 150.f, 50.f,
+	this->buttons["EDITOR"] = new gui::Button(300.f, 680.f, 150.f, 40.f,
 		&this->font, "Editor", 25,
 		sf::Color(255, 255, 255, 255), sf::Color(150, 150, 150, 255), sf::Color(20, 20, 20, 200),
-		sf::Color(25, 25, 25, 255), sf::Color(150, 150, 150, 255), sf::Color(20, 20, 20, 0));
+		sf::Color(25, 25, 25, 220), sf::Color(150, 150, 150, 220), sf::Color(20, 20, 20, 220));
 
-	this->buttons["EXIT_GAME"] = new gui::Button(300.f, 880.f, 150.f, 50.f,
+	this->buttons["EXIT_GAME"] = new gui::Button(300.f, 880.f, 150.f, 40.f,
 		&this->font, "Quit Game", 25,
 		sf::Color(255, 255, 255, 255), sf::Color(150, 150, 150, 255), sf::Color(20, 20, 20, 200),
-		sf::Color(25, 25, 25, 255), sf::Color(150, 150, 150, 255), sf::Color(20, 20, 20, 0));
+		sf::Color(25, 25, 25, 220), sf::Color(150, 150, 150, 220), sf::Color(20, 20, 20, 220));
 }
 
 void MainMenuState::updateInput(const float& dt)
@@ -106,7 +106,7 @@ void MainMenuState::updateButtons()
 {
 	for (auto& it : this->buttons)
 	{
-		it.second->updatePressButton(this->mousePosView);
+		it.second->updatePressButton(this->mousePosWindow);
 	}
 
 	if (this->buttons["NEW_GAME"]->isPressed())

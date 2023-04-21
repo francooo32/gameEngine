@@ -11,7 +11,7 @@ class State;
 class StateData
 {
 public :
-	StateData() {};
+	StateData(){};
 
 	float gridSize;
 	sf::RenderWindow* window;
@@ -55,7 +55,7 @@ public:
 		void pauseState();
 		void unpauseState();
 
-		virtual void updateMousePosition();
+		virtual void updateMousePosition(sf::View* view = NULL);
 		virtual void updateKeyTime(const float& dt);
 		virtual void updateInput(const float& dt) = 0;
 		virtual void update(const float& dt) = 0;
