@@ -46,7 +46,7 @@ namespace gui
 		void setText(const std::string text);
 		void setId(const short unsigned id);
 
-		void updatePressButton(const sf::Vector2f& mousePos);
+		void updatePressButton(const sf::Vector2i& mousePosWindow);
 		void render(sf::RenderTarget& target);
 	};
 
@@ -54,7 +54,7 @@ namespace gui
 
 	private :
 		float keytime;
-		float keytimeMax;
+		const float keytimeMax;
 		sf::Font& font;
 		gui::Button* activeElement;
 		std::vector<gui::Button*> list;
@@ -69,7 +69,36 @@ namespace gui
 
 		const bool getKeytime();
 		void updateKeytime(const float& dt);
-		void updatePressButton(const sf::Vector2f& mousePos, const float& dt);
+		void updatePressButton(const sf::Vector2i& mousePosWindow, const float& dt);
+		void render(sf::RenderTarget& target);
+	};
+
+	class TextureSelector 
+	{
+	private :
+		sf::RectangleShape bounds;
+		sf::Sprite sheet;
+		sf::RectangleShape selector;
+		sf::Vector2u mousePosGrid;
+		sf::IntRect textureRect;
+		gui::Button* hide_btn;
+		float gridSize;
+		float keytime;
+		const float keytimeMax;
+		bool active;
+		bool hidden;
+
+	public :
+		TextureSelector(float x, float y, float width, float height, float gridSize, const sf::Texture* texture_sheet,
+			sf::Font& font, std::string text);
+		~TextureSelector();
+
+		const bool& getActive() const;
+		const bool getKeytime();
+		const sf::IntRect& getTextureRect() const;
+		void updateKeytime(const float& dt);
+
+		void update(const sf::Vector2i& mousePosWindow, const float& dt);
 		void render(sf::RenderTarget& target);
 	};
 }
