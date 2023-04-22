@@ -28,6 +28,7 @@ public:
 	void createHitboxComponent(sf::Sprite& sprite, const float offset_x, const float offset_y, float width, float height);
 
 	//Functions
+	virtual const sf::Vector2f& getPosition() const;
 	virtual void setPosition(const float x, const float y);
 	virtual void move(const float x, const float y, const float& dt);
 	virtual void update(const float& dt);
