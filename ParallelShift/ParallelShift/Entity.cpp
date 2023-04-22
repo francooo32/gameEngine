@@ -44,6 +44,13 @@ void Entity::createHitboxComponent(sf::Sprite& sprite, const float offset_x, con
 
 //functions
 
+
+
+const sf::Vector2f& Entity::getPosition() const
+{
+	return this->sprite.getPosition();
+}
+
 void Entity::setPosition(const float x, const float y)
 {
 		this->sprite.setPosition(x, y);
