@@ -197,6 +197,7 @@ void EditorState::initGui()
 	this->textureSelector = new gui::TextureSelector(10.f, 10.f, 250.f, 250.f,
 								this->stateData->gridSize, this->tileMap->getTileSheet(),
 									this->font, "Hidde");
+
 }
 
 void EditorState::initTileMap()

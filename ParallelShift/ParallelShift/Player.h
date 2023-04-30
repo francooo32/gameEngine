@@ -20,7 +20,8 @@ public :
 
     void updateAttack();
     void updateAnimation(const float& dt);
-    virtual void update(const float& dt);
+    void update(const float& dt);
+    void render(sf::RenderTarget& target);
 };
 
 #endif

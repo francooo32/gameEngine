@@ -31,6 +31,7 @@ private:
 
 	gui::TextureSelector* textureSelector;
 
+
 	bool collision;
 	short type;
 	float cameraSpeed;

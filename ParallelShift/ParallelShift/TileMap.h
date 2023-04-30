@@ -2,6 +2,10 @@
 #define TILEMAP_H 
 
 #include "Tile.h"
+#include "Entity.h"
+
+class Tile;
+class Entity;
 
 class TileMap
 {
@@ -9,12 +13,18 @@ private:
 	float gridSizeF;
 	unsigned gridSizeU;
 	unsigned layers;
-	sf::Vector2u maxSize;
-	
+	sf::Vector2u maxSizeWorldGrid;
+	sf::Vector2f maxSizeWorldF;
 	std::vector<std::vector<std::vector<Tile*> > > map;
-
 	sf::Texture tileSheet;
 	std::string textureFile;
+	sf::RectangleShape collisionBox;
+
+	unsigned fromX;
+	unsigned toX;
+	unsigned fromY;
+	unsigned toY;
+	unsigned layer;
 
 	void clearMemory();
 
@@ -29,8 +39,9 @@ public:
 	void removeTile(const unsigned x, const unsigned y, const unsigned z);
 	void saveToFile(const std::string file_name);
 	void loadFromFile(const std::string file_name);
+	void updateCollision(Entity* entity);
 	void update();
-	void render(sf::RenderTarget& target);
+	void render(sf::RenderTarget& target, Entity* entity = NULL);
 };
 
 #endif

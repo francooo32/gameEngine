@@ -19,6 +19,8 @@ public :
 		short type = TileTypes::DEFAULT);
 	virtual ~Tile();
 
+	const bool& getCollision() const;
+	const sf::Vector2f& getPosition() const;
 	const std::string getAsString() const;
 	void update();
 	void render(sf::RenderTarget& target);

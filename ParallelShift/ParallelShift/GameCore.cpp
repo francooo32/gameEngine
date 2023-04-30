@@ -120,7 +120,7 @@ void GameCore::update()
     this->updateSFMLEvents();
 
     //Update items
-    if (!this->states.empty())
+    if (!this->states.empty() && this->window->hasFocus())
     {
         this->states.top()->update(this->dt);
         if (this->states.top()->getQuit())

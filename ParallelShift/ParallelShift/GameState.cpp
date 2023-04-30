@@ -99,7 +99,7 @@ void GameState::initTileMap()
 
 void GameState::updateView(const float& dt)
 {
-	this->view.setCenter(this->player->getPosition());
+	this->view.setCenter(std::floor(this->player->getPosition().x), std::floor(this->player->getPosition().y));
 }
 
 void GameState::updateInput(const float& dt)
@@ -132,6 +132,13 @@ void GameState::updatePauseMenuButtons()
 		this->endState();
 }
 
+void GameState::updateTileMap(const float& dt)
+{
+	this->tileMap->update();
+	this->tileMap->updateCollision(this->player);
+
+}
+
 void GameState::update(const float& dt)
 {
 
@@ -141,8 +148,9 @@ void GameState::update(const float& dt)
 
 	if (!this->paused) {
 		this->updateView(dt);
-		this->player->update(dt);
 		this->updatePlayerInput(dt);
+		this->player->update(dt);
+		this->updateTileMap(dt);
 	}
 	else
 	{
