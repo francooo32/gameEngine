@@ -36,12 +36,16 @@ void GameState::initDeferredRender()
 void GameState::initView()
 {
 	view.setSize(sf::Vector2f(
-						this->stateData->gfxSettings->resolution.width,
-						this->stateData->gfxSettings->resolution.height));
+		static_cast<float>(this->stateData->gfxSettings->resolution.width),
+		static_cast<float>(this->stateData->gfxSettings->resolution.height)
+		)
+	);
 
 	view.setCenter(sf::Vector2f(
-		this->stateData->gfxSettings->resolution.width / 2.f,
-		this->stateData->gfxSettings->resolution.height / 2.f));
+		static_cast<float>(this->stateData->gfxSettings->resolution.width) / 2.f,
+		static_cast<float>(this->stateData->gfxSettings->resolution.height / 2.f)
+		)
+	);
 }
 
 void GameState::initKeybinds()
@@ -135,7 +139,7 @@ void GameState::updatePauseMenuButtons()
 void GameState::updateTileMap(const float& dt)
 {
 	this->tileMap->update();
-	this->tileMap->updateCollision(this->player);
+	this->tileMap->updateCollision(this->player, dt);
 
 }
 
@@ -149,8 +153,8 @@ void GameState::update(const float& dt)
 	if (!this->paused) {
 		this->updateView(dt);
 		this->updatePlayerInput(dt);
-		this->player->update(dt);
 		this->updateTileMap(dt);
+		this->player->update(dt);
 	}
 	else
 	{
@@ -167,7 +171,7 @@ void GameState::render(sf::RenderTarget* target)
 	this->renderTexture.clear();
 
 	this->renderTexture.setView(this->view);
-	this->tileMap->render(this->renderTexture);
+	this->tileMap->render(this->renderTexture, this->player);
 
 	this->player->render(this->renderTexture);
 
@@ -178,6 +182,6 @@ void GameState::render(sf::RenderTarget* target)
 	}
 
 	this->renderTexture.display();
-	this->renderSprite.setTexture(this->renderTexture.getTexture());
+	//this->renderSprite.setTexture(this->renderTexture.getTexture());
 	target->draw(this->renderSprite);
 }

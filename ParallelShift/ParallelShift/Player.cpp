@@ -9,15 +9,15 @@ Player::Player(float x, float y, sf::Texture& texture_sheet)
 	this->setPosition(x, y);
 
 	this->createHitboxComponent(this->sprite, 55.f, 60.f, 120.f, 130.f);
-	this->createMovementComponent(300.f, 15.f, 5.f);
+	this->createMovementComponent(300.f, 1500.f, 500.f);
 	this->createAnimationComponent(texture_sheet);
 
 	//Configuration for sprite animation																								
 	this->animationComponent->addAnimation("IDLE", 0.1f, 0, 0, 0, 0, 192, 192);
 	this->animationComponent->addAnimation("WALK_LEFT", 1.f, 0, 2, 6, 2, 192, 192);
 	//this->animationComponent->addAnimation("WALK_RIGHT", 1.f, 0, 1, 6, 1, 192, 192);
-	this->animationComponent->addAnimation("WALK_UP", 1.f, 0, 2, 6, 2, 192, 192);
-	this->animationComponent->addAnimation("WALK_DOWN", 1.f, 0, 3, 6, 3, 192, 192);
+	this->animationComponent->addAnimation("WALK_UP", 1.f, 0, 4, 4, 3, 192, 192);
+	this->animationComponent->addAnimation("WALK_DOWN", 1.f, 0, 3, 4, 3, 192, 192);
 	this->animationComponent->addAnimation("ATTACK", 1.f, 0, 2, 6, 2, 192, 192);
 
 }
@@ -103,7 +103,6 @@ void Player::update(const float& dt)
 {
 	this->movementComponent->update(dt);
 
-	
 	this->updateAttack();
 	
 	this->updateAnimation(dt);

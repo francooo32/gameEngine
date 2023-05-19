@@ -133,7 +133,7 @@ gui::DropDownList::DropDownList(float x, float y, float width, float height,
 		sf::Color(255, 255, 255, 200), sf::Color(150, 150, 150, 255), sf::Color(20, 20, 20, 50)
 	);
 
-	for (size_t i = 0; i < nrOfelements; i++)
+	for (unsigned i = 0; i < nrOfelements; i++)
 	{
 		this->list.push_back(
 			new gui::Button(x, y + ((i + 1) * height), width, height,
@@ -246,11 +246,13 @@ gui::TextureSelector::TextureSelector(float x, float y, float width, float heigh
 
 	if (this->sheet.getGlobalBounds().width > this->bounds.getGlobalBounds().width)
 	{
-		this->sheet.setTextureRect(sf::IntRect(0, 0, this->bounds.getGlobalBounds().width, this->sheet.getGlobalBounds().height));
+		this->sheet.setTextureRect(sf::IntRect(0, 0, static_cast<int>(this->bounds.getGlobalBounds().width),
+									static_cast<int>(this->sheet.getGlobalBounds().height)));
 	}
 	if (this->sheet.getGlobalBounds().height > this->bounds.getGlobalBounds().height)
 	{
-		this->sheet.setTextureRect(sf::IntRect(0, 0, this->sheet.getGlobalBounds().width, this->bounds.getGlobalBounds().height));
+		this->sheet.setTextureRect(sf::IntRect(0, 0, static_cast<int>(this->sheet.getGlobalBounds().width),
+										static_cast<int>(this->bounds.getGlobalBounds().height)));
 	}
 
 	this->selector.setPosition(x + offset, y);

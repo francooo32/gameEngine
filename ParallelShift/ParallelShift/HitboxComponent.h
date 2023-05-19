@@ -16,7 +16,7 @@ public :
 
 	const sf::Vector2f& getPosition() const;
 	const sf::FloatRect getGlobalBounds() const;
-	const sf::FloatRect& getNextPosition(sf::Vector2f& velocity);
+	const sf::FloatRect& getNextPosition(const sf::Vector2f & velocity);
 
 	bool intersects(const sf::FloatRect& frect);
 	void setPosition(const sf::Vector2f& position);
