@@ -79,6 +79,21 @@ const sf::Texture* TileMap::getTileSheet() const
 	return &this->tileSheet;
 }
 
+const int TileMap::getLayerSize(const int x, const int y, const int layer) const
+{
+	if (x >= 0 && x < this->map.size())
+	{
+		if (y >= 0 && y < this->map[x].size())
+		{
+			if (layer >= 0 && layer < this->map[x][y].size())
+			{
+				return this->map[x][y][layer].size();
+			}
+		}
+	}
+	return -1;
+}
+
 void TileMap::addTile(const unsigned x, const unsigned y, const unsigned z, const sf::IntRect& texture_rect,
 							const bool collision, const short type)
 {
@@ -338,55 +353,59 @@ void TileMap::update()
 
 }
 
-void TileMap::render(sf::RenderTarget& target, Entity* entity)
+void TileMap::render(sf::RenderTarget& target, sf::Vector2i gridpPosition)
 {
-	if(entity)
-	{ 
-		this->layer = 0;
+	this->layer = 0;
 
-		this->fromX = entity->getGridPosition(this->gridSizeI).x - 1;
-		if (this->fromX < 0)
-			this->fromX = 0;
-		else if (this->fromX > this->maxSizeWorldGrid.x)
-			this->fromX = this->maxSizeWorldGrid.x;
+	this->fromX = gridpPosition.x - 1;
+	if (this->fromX < 0)
+		this->fromX = 0;
+	else if (this->fromX > this->maxSizeWorldGrid.x)
+		this->fromX = this->maxSizeWorldGrid.x;
 
-		this->toX = entity->getGridPosition(this->gridSizeI).x + 15;
-		if (this->toX < 0)
-			this->toX = 0;
-		else if (this->toX > this->maxSizeWorldGrid.x)
-			this->toX = this->maxSizeWorldGrid.x;
+	this->toX = gridpPosition.x + 15;
+	if (this->toX < 0)
+		this->toX = 0;
+	else if (this->toX > this->maxSizeWorldGrid.x)
+		this->toX = this->maxSizeWorldGrid.x;
 
-		this->fromY = entity->getGridPosition(this->gridSizeI).y - 1;
-		if (this->fromY < 0)
-			this->fromY = 0;
-		else if (this->fromY > this->maxSizeWorldGrid.y)
-			this->fromY = this->maxSizeWorldGrid.y;
+	this->fromY = gridpPosition.y - 1;
+	if (this->fromY < 0)
+		this->fromY = 0;
+	else if (this->fromY > this->maxSizeWorldGrid.y)
+		this->fromY = this->maxSizeWorldGrid.y;
 
-		this->toY = entity->getGridPosition(this->gridSizeI).y + 15;
-		if (this->toY < 0)
-			this->toY = 0;
-		else if (this->toY > this->maxSizeWorldGrid.y)
-			this->toY = this->maxSizeWorldGrid.y;
+	this->toY = gridpPosition.y + 15;
+	if (this->toY < 0)
+		this->toY = 0;
+	else if (this->toY > this->maxSizeWorldGrid.y)
+		this->toY = this->maxSizeWorldGrid.y;
 
-		for (int x = this->fromX; x < this->toX; x++)
+	for (int x = this->fromX; x < this->toX; x++)
+	{
+		for (int y = this->fromY; y < this->toY; y++)
 		{
-			for (int y = this->fromY; y < this->toY; y++)
+			for (size_t k = 0; k < this->map[x][y][this->layer].size(); k++)
 			{
-				for (size_t k = 0; k < this->map[x][y][this->layer].size(); k++)
-				{
-				//This check, at the moment, is important, you need to check that the leyer position exists, or the sprite will be null
-				//and the game will crash, this is wrong way for performance, a better way would be to not load null spaces.
-					if (this->map[x][y][this->layer][k]) {
+			//This check, at the moment, is important, you need to check that the leyer position exists, or the sprite will be null
+			//and the game will crash, this is wrong way for performance, a better way would be to not load null spaces.
+				if (this->map[x][y][this->layer][k]) {
+					if (this->map[x][y][this->layer][k]->getType() == TileTypes::OVERLAPTILE)
+					{
+						this->deferredRenderStack.push(this->map[x][y][this->layer][k]);
+					}
+					else
+					{
 						this->map[x][y][this->layer][k]->render(target);
-						if (this->map[x][y][this->layer][k]->getCollision())
-						{
-							this->collisionBox.setPosition(this->map[x][y][this->layer][k]->getPosition());
-							target.draw(this->collisionBox);
-						}
+					}
+					if (this->map[x][y][this->layer][k]->getCollision())
+					{
+						this->collisionBox.setPosition(this->map[x][y][this->layer][k]->getPosition());
+						target.draw(this->collisionBox);
 					}
 				}
-				
 			}
+				
 		}
 	}
 	/*else
@@ -395,20 +414,33 @@ void TileMap::render(sf::RenderTarget& target, Entity* entity)
 		{
 			for (auto& y : x)
 			{
-				for (auto* z : y)
+				for (auto& z : y)
 				{
-					if (z != NULL)
+					for(auto *k : z)
 					{
-						z->render(target);
-						if (z->getCollision())
+						if (k != NULL)
 						{
-							this->collisionBox.setPosition(z->getPosition());
-							target.draw(this->collisionBox);
-						}
+							k->render(target);
+							if (k->getCollision())
+							{
+								this->collisionBox.setPosition(k->getPosition());
+								target.draw(this->collisionBox);
+							}
 
+						}
 					}
+					
 				}
 			}
 		}
 	}*/
+}
+
+void TileMap::renderDeferred(sf::RenderTarget& target)
+{
+	while (!this->deferredRenderStack.empty())
+	{
+		deferredRenderStack.top()->render(target);
+		deferredRenderStack.pop();
+	}
 }

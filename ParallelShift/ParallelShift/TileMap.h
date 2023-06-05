@@ -15,8 +15,8 @@ private:
 	int layers;
 	sf::Vector2i maxSizeWorldGrid;
 	sf::Vector2f maxSizeWorldF;
-	//std::vector<std::vector<std::vector<Tile*> > > map;
 	std::vector<std::vector<std::vector<std::vector<Tile*> > > > map;
+	std::stack<Tile*> deferredRenderStack;
 	sf::Texture tileSheet;
 	std::string textureFile;
 	sf::RectangleShape collisionBox;	
@@ -34,6 +34,7 @@ public:
 	virtual ~TileMap();
 
 	const sf::Texture* getTileSheet() const;
+	const int getLayerSize(const int x, const int y, const int layer) const;
 
 	void addTile(const unsigned x, const unsigned y, const unsigned z, const sf::IntRect& texture_rect, 
 					const bool collision, const short type);
@@ -42,7 +43,8 @@ public:
 	void loadFromFile(const std::string file_name);
 	void updateCollision(Entity* entity, const float& dt);
 	void update();
-	void render(sf::RenderTarget& target, Entity* entity = NULL);
+	void render(sf::RenderTarget& target, sf::Vector2i gridpPosition);
+	void renderDeferred(sf::RenderTarget& target);
 };
 
 #endif

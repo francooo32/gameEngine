@@ -1,7 +1,7 @@
 #ifndef TILE_H
 #define TILE_H
 
-enum TileTypes {DEFAULT = 0, DAMAGING};
+enum TileTypes {DEFAULT = 0, DAMAGING, OVERLAPTILE};
 
 class Tile
 {
@@ -19,6 +19,7 @@ public :
 		short type = TileTypes::DEFAULT);
 	virtual ~Tile();
 
+	const short& getType() const;
 	const bool& getCollision() const;
 	const sf::Vector2f& getPosition() const;
 	const sf::FloatRect getGlobalBounds() const;
