@@ -2,6 +2,8 @@
 #define PLAYER_H
 #include "Entity.h"
 
+class Entity;
+
 class Player :
     public Entity
 {
@@ -20,7 +22,8 @@ public :
 
     void updateAttack();
     void updateAnimation(const float& dt);
-    virtual void update(const float& dt);
+    void update(const float& dt);
+    void render(sf::RenderTarget& target);
 };
 
 #endif

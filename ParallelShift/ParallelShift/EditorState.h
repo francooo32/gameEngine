@@ -31,9 +31,11 @@ private:
 
 	gui::TextureSelector* textureSelector;
 
+
 	bool collision;
 	short type;
 	float cameraSpeed;
+	int layer;
 
 	void initVariables();
 	void initView();
