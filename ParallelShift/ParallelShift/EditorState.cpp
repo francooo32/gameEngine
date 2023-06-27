@@ -128,8 +128,8 @@ void EditorState::initView()
 									)
 						);
 
-	this->view.setCenter(static_cast<float>(this->stateData->gfxSettings->resolution.width) / 2.f,
-							static_cast<float>(this->stateData->gfxSettings->resolution.height) / 2.f);
+	this->view.setCenter(static_cast<float>(this->stateData->gfxSettings->resolution.width) / 4.f,
+							static_cast<float>(this->stateData->gfxSettings->resolution.height) / 4.f);
 }
 
 void EditorState::initBackground()
@@ -208,7 +208,7 @@ void EditorState::initGui()
 
 void EditorState::initTileMap()
 {
-	this->tileMap = new TileMap(this->stateData->gridSize, 10, 10, "Resources/Images/Tiles/Grass100px.png");
+	this->tileMap = new TileMap(this->stateData->gridSize, 10, 10, "Resources/Images/Tiles/Tiles100px.png");
 }
 
 void EditorState::updateButtons()

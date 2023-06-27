@@ -16,7 +16,7 @@ Player::Player(float x, float y, sf::Texture& texture_sheet)
 	this->animationComponent->addAnimation("IDLE", 0.1f, 0, 0, 0, 0, 192, 192);
 	this->animationComponent->addAnimation("WALK_LEFT", 1.f, 0, 2, 6, 2, 192, 192);
 	//this->animationComponent->addAnimation("WALK_RIGHT", 1.f, 0, 1, 6, 1, 192, 192);
-	this->animationComponent->addAnimation("WALK_UP", 1.f, 0, 4, 4, 3, 192, 192);
+	this->animationComponent->addAnimation("WALK_UP", 1.f, 0, 4, 4, 4, 192, 192);
 	this->animationComponent->addAnimation("WALK_DOWN", 1.f, 0, 3, 4, 3, 192, 192);
 	this->animationComponent->addAnimation("ATTACK", 1.f, 0, 2, 6, 2, 192, 192);
 

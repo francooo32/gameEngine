@@ -87,6 +87,9 @@
     <ClCompile Include="GraphicsSettings.cpp">
       <Filter>Archivos de recursos</Filter>
     </ClCompile>
+    <ClCompile Include="AttributeComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameCore.h">
@@ -139,6 +142,9 @@
     </ClInclude>
     <ClInclude Include="GraphicsSettings.h">
       <Filter>Archivos de recursos</Filter>
+    </ClInclude>
+    <ClInclude Include="AttributeComponent.h">
+      <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
